@@ -1,3 +1,6 @@
+git commit -am "Fonctionnalité Ajout d'un utilisateur terminer, passer sur l'affichage"
+git push
+
 
 .isdigit() # Vérifie si la chaine est numérique
 .isalpha() # Vérifie si la chaine est alphabétique
