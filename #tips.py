@@ -1,4 +1,4 @@
-git commit -am "Fonctionnalité Ajout d'un utilisateur terminer, passer sur l'affichage"
+git commit -am "Finir la fonctionnalité de suppression d'un utilisateur"
 git push
 
 for index, utilisateur in enumerate(liste_utilisateurs):
