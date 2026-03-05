@@ -1,4 +1,4 @@
-#region Menu principal
+# Menu principal
 def afficher_menu_principal():
     print("🔹🔹🔹🔹🔹MENU PRINCIPAL🔹🔹🔹🔹🔹"
           "\n1 - Ajouter un utilisateur"
@@ -12,9 +12,10 @@ def afficher_menu_principal():
 def afficher_liste_vide():
       print("😐 Certaines fonctionnalités sont bloquées "
             "puisque la liste des utilisateurs est vide 😐")
-#endregion
 
-#region Consignes
+
+
+# Consignes
 def afficher_consignes_prenom():
       print("\nIndiquez le prénom de l'utilisateur en respectant les consignes suivantes :"
             "\n- Doit contenir au moins 2 caractères"
@@ -39,9 +40,28 @@ def afficher_consignes_mot_de_passe():
             "\n- Ne doit contenir aucun espace")
       afficher_revenir_menu_principal()
 
-def afficher_consigne_confirmation_procedure(procedure, prenom):
+def afficher_consignes_confirmation_procedure(procedure, prenom):
       print(f"\n\nIndiquez 👉oui/non👈 pour la confirmation de {procedure} s'agissant de {prenom}")
-#endregion
+
+def afficher_consignes_recherche_par_prenom():
+      print("Indiquez le prénom (ou en partie) de l'utilisateur en question")
+      afficher_revenir_menu_principal()
+
+def afficher_consignes_selection_utilisateur():
+      print("Indiquez le nombre qui précède le prenom de l'utilisateur en question")
+      afficher_revenir_menu_principal()
+
+
+
+def afficher_liste_utilisateurs(liste_utilisateurs):
+      print("\n\n🔹🔹🔹🔹AFFICHER LA LISTE DES UTILISATEURS🔹🔹🔹🔹")
+      for index, utilisateur in enumerate(liste_utilisateurs):
+            print(f"{index} - Prénom: {utilisateur['prenom']} - Age: {utilisateur['age']} - "
+                  f"Mot de passe: {utilisateur['mot_de_passe']} - Niveau de sécurité: {utilisateur['niveau_securite']}")
+
+def afficher_liste_utilisateurs_trouves(liste_utilisateurs_trouves):
+      for index, utilisateur in enumerate(liste_utilisateurs_trouves):
+            print(f"{index} - {utilisateur['prenom']} - {utilisateur['age']} ans")
 
 
 

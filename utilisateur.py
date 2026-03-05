@@ -1,14 +1,15 @@
 from affichage import (afficher_consignes_prenom, afficher_liste_erreur,
                        afficher_consignes_age, afficher_consignes_mot_de_passe,
-                       afficher_consigne_confirmation_procedure)
+                       afficher_consignes_confirmation_procedure, afficher_consignes_recherche_par_prenom,
+                       afficher_liste_utilisateurs_trouves, afficher_consignes_selection_utilisateur)
 from validation import (validation_prenom, validation_age, validation_mot_de_passe,
-                        validation_confirmation_procedure)
+                        validation_confirmation_procedure, validation_recherche_par_critere)
 
 
 def ajouter_utilisateur(liste_utilisateurs):
     print("\n\n🔹🔹🔹🔹🔹AJOUTER UN UTILISATEUR🔹🔹🔹🔹🔹")
 
-    utilisateur = {"prenom": "", "age": 0, "mot_de_passe": "", "securite": ""}
+    utilisateur = {"prenom": "", "age": 0, "mot_de_passe": "", "niveau_securite": ""}
 
     while True: # Tant que le prénom n'est pas valide
         afficher_consignes_prenom()
@@ -44,12 +45,12 @@ def ajouter_utilisateur(liste_utilisateurs):
             afficher_liste_erreur(erreurs)
         else:
             utilisateur['mot_de_passe'] = mot_de_passe
-            utilisateur['securite'] = "Faible" if len(mot_de_passe) <= 9 else "Moyen" if len(mot_de_passe) <= 11 else "Fort"
+            utilisateur['niveau_securite'] = "Faible" if len(mot_de_passe) <= 9 else "Moyen" if len(mot_de_passe) <= 11 else "Fort"
             break
 
     while True: # Tant que la confirmation n'est pas valide
         procedure = "d'ajout d'un utilisateur"
-        afficher_consigne_confirmation_procedure(procedure, utilisateur['prenom'])
+        afficher_consignes_confirmation_procedure(procedure, utilisateur['prenom'])
         confirmation = input("Confirmation : ").lower()
         erreurs = validation_confirmation_procedure(confirmation)
         if erreurs:
@@ -60,3 +61,25 @@ def ajouter_utilisateur(liste_utilisateurs):
                 return liste_utilisateurs
             else:
                 return liste_utilisateurs
+
+def supprimer_utilisateur(liste_utilisateurs):
+    print("\n\n🔹🔹🔹🔹🔹SUPPRIMER UN UTILISATEUR🔹🔹🔹🔹🔹")
+
+    critere = 'prenom'
+    while True: # Tant que le prenom (ou une partie) n'est pas saisi
+        afficher_consignes_recherche_par_prenom()
+        prenom = input("Prenom 👉 ")
+        liste_utilisateurs_trouves = validation_recherche_par_critere(prenom, liste_utilisateurs, critere)
+        if prenom.upper() == "SORTIR": # Si l'utilisateur souhaite revenir au menu principal
+            return liste_utilisateurs
+        elif not liste_utilisateurs_trouves: # S'il n'y a pas de correspondance
+            print("😐 Aucun utilisateur ne correspond à votre indication 😐")
+        else:# S'il y a des correspondances
+            break
+
+
+    while True: # Tant que l'un des utilisateurs trouvés n'a pas été selectionné
+        afficher_liste_utilisateurs_trouves(liste_utilisateurs_trouves)
+        afficher_consignes_selection_utilisateur()
+        nombre = input("Nombre 👉 ")
+        erreurs =
