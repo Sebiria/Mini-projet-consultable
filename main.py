@@ -3,47 +3,29 @@ from affichage import (afficher_menu_principal, afficher_liste_erreur, afficher_
 from utilisateur import (ajouter_utilisateur, supprimer_utilisateur, modifier_mot_de_passe_utilisateur,
                          implementer_donnees_test)
 from validation import validation_choix_fonctionnalite
+from stockage import charger_utilisateurs, sauvegarder_utilisateurs
 
 if __name__ == "__main__":
-    liste_utilisateurs = []
+    liste_utilisateurs = charger_utilisateurs()
 
     while True: # Tant que le programme est en cours d'exécution
+        fonctionnalite = {"1": ajouter_utilisateur,
+                          "2": supprimer_utilisateur,
+                          "3": modifier_mot_de_passe_utilisateur,
+                          "4": afficher_liste_utilisateurs,
+                          "5": afficher_statistiques,
+                          "000": implementer_donnees_test}
         afficher_menu_principal()
         choix = input("Votre choix : ")
         erreurs = validation_choix_fonctionnalite(choix)
         if erreurs:
             afficher_liste_erreur(erreurs)
-        else:
-
-
-            #ACCES AUX FONCTIONNALITES
-
-            if choix == "1":  # Ajouter un utilisateur
-                liste_utilisateur = ajouter_utilisateur(liste_utilisateurs)
-
-            elif choix == "6":
-                print("\n\n💤💤💤 Fin du programme 💤💤💤")
-                break
-
-            elif choix == "000":
-                liste_utilisateur = implementer_donnees_test(liste_utilisateurs)
-                print("✅✅✅ Données test effectifs ✅✅✅")
-
-            else:
-                if not liste_utilisateurs:
-                    afficher_liste_vide()
-                else:
-
-                    if choix == "2":
-                        liste_utilisateurs = supprimer_utilisateur(liste_utilisateurs)
-
-                    elif choix == "3":
-                        liste_utilisateurs = modifier_mot_de_passe_utilisateur(liste_utilisateurs)
-
-                    elif choix == "4":  # Afficher la liste des utilisateurs
-                        afficher_liste_utilisateurs(liste_utilisateurs)
-                        input("\033[33mPour revenir au menu principal, appuyez sur la touche ⚪ENTRÉE⚪\033[0m")
-
-                    elif choix == "5":
-                        liste_utilisateurs = afficher_statistiques(liste_utilisateurs)
-                        input("\033[33mPour revenir au menu principal, appuyez sur la touche ⚪ENTRÉE⚪\033[0m")
+        elif choix == "6":
+            print("\n\n💤💤💤 Fin du programme 💤💤💤")
+            break
+        elif choix in ("000", "1"):
+            liste_utilisateurs = fonctionnalite[choix](liste_utilisateurs)
+        elif choix in ("2", "3", "4", "5") and liste_utilisateurs:
+            liste_utilisateurs = fonctionnalite[choix](liste_utilisateurs)
+        elif choix in ("2", "3", "4", "5"):
+            afficher_liste_vide()

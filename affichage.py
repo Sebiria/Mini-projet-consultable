@@ -18,6 +18,7 @@ def afficher_liste_utilisateurs(liste_utilisateurs):
       for index, utilisateur in enumerate(liste_utilisateurs):
             print(f"{index} - Prénom: {utilisateur['prenom']} - Age: {utilisateur['age']} - "
                   f"Mot de passe: {utilisateur['mot_de_passe']} - Niveau de sécurité: {utilisateur['niveau_securite']}")
+      input("\033[33mPour revenir au menu principal, appuyez sur la touche ⚪ENTRÉE⚪\033[0m")
 
 def afficher_statistiques(liste_utilisateurs):
       print("\n\n🔹🔹🔹🔹🔹AFFICHER LES STATISTIQUES🔹🔹🔹🔹🔹")
@@ -43,6 +44,8 @@ def afficher_statistiques(liste_utilisateurs):
             f"\nLe nombre d'utilisateurs de niveau de sécurité fort est de 👉 {compteur["niveau-fort"]}")
 
       print(f"\nLe taille moyenne des mots de passe est de 👉 {compteur["longueur_total_mot_de_passe"] / len(liste_utilisateurs)}")
+
+      input("\n\033[33mPour revenir au menu principal, appuyez sur la touche ⚪ENTRÉE⚪\033[0m")
 
 
 # Consignes

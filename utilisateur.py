@@ -5,7 +5,7 @@ from affichage import (afficher_consignes_prenom, afficher_liste_erreur,
 from validation import (validation_prenom, validation_age, validation_mot_de_passe,
                         validation_confirmation_procedure, validation_recherche_par_critere,
                         validation_selection_du_bon_utilisateur)
-
+from stockage import sauvegarder_utilisateurs
 
 def ajouter_utilisateur(liste_utilisateurs):
     print("\n\n🔹🔹🔹🔹🔹AJOUTER UN UTILISATEUR🔹🔹🔹🔹🔹")
@@ -60,6 +60,7 @@ def ajouter_utilisateur(liste_utilisateurs):
             if confirmation == "oui":
                 liste_utilisateurs.append(utilisateur)
                 print(f"✅✅✅ L'utilisateur {utilisateur['prenom']} a bien été ajouté ✅✅✅")
+                sauvegarder_utilisateurs(liste_utilisateurs)
                 return liste_utilisateurs
             else:
                 print(f"❌❌❌ L'utilisateur {utilisateur['prenom']} n'a pas été ajouté ❌❌❌")
@@ -105,6 +106,7 @@ def supprimer_utilisateur(liste_utilisateurs):
             if confirmation == "oui":
                 liste_utilisateurs.remove(utilisateur)
                 print(f"✅✅✅ L'utilisateur {utilisateur['prenom']} a bien été supprimé ✅✅✅")
+                sauvegarder_utilisateurs(liste_utilisateurs)
                 return liste_utilisateurs
             else:
                 print(f"❌❌❌ L'utilisateur {utilisateur['prenom']} n'a pas été supprimé ❌❌❌")
@@ -173,6 +175,7 @@ def modifier_mot_de_passe_utilisateur(liste_utilisateurs):
                 return liste_utilisateurs
             else:
                 print(f"❌❌❌ Le mot de passe de l'utilisateur {utilisateur['prenom']} n'a pas été changé ❌❌❌")
+                sauvegarder_utilisateurs(liste_utilisateurs)
                 return liste_utilisateurs
 
 def implementer_donnees_test(liste_utilisateurs):
@@ -193,4 +196,6 @@ def implementer_donnees_test(liste_utilisateurs):
     ]
     for i in liste:
         liste_utilisateurs.append(i)
+    sauvegarder_utilisateurs(liste_utilisateurs)
+    print("✅✅✅ Données test effectifs ✅✅✅")
     return liste_utilisateurs

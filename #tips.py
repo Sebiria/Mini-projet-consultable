@@ -1,4 +1,4 @@
-git commit -am "Mini-projet supposément terminé"
+git commit -am "Mini-projet supposément terminé avec sauvegarde"
 git push
 
 for index, utilisateur in enumerate(liste_utilisateurs):
