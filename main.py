@@ -21,7 +21,7 @@ if __name__ == "__main__":
             if choix == "1":  # Ajouter un utilisateur
                 liste_utilisateur = ajouter_utilisateur(liste_utilisateurs)
 
-            elif not choix == "6":
+            elif choix == "6":
                 print("\n\n💤💤💤 Fin du programme 💤💤💤")
                 break
 
