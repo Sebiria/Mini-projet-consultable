@@ -13,6 +13,36 @@ def afficher_liste_vide():
       print("😐 Certaines fonctionnalités sont bloquées "
             "puisque la liste des utilisateurs est vide 😐")
 
+def afficher_liste_utilisateurs(liste_utilisateurs):
+      print("\n\n🔹🔹🔹🔹AFFICHER LA LISTE DES UTILISATEURS🔹🔹🔹🔹")
+      for index, utilisateur in enumerate(liste_utilisateurs):
+            print(f"{index} - Prénom: {utilisateur['prenom']} - Age: {utilisateur['age']} - "
+                  f"Mot de passe: {utilisateur['mot_de_passe']} - Niveau de sécurité: {utilisateur['niveau_securite']}")
+
+def afficher_statistiques(liste_utilisateurs):
+      print("\n\n🔹🔹🔹🔹🔹AFFICHER LES STATISTIQUES🔹🔹🔹🔹🔹")
+
+      compteur = {"moins_de_30_ans": 0, "plus_de_30_ans": 0,
+                  "niveau-faible": 0, "niveau_moyen": 0, "niveau_fort": 0,
+                  "longueur_total_mot_de_passe": 0}
+      for utilisateur in liste_utilisateurs:
+            compteur["moins_de_30_ans"] += 1 if utilisateur['age'] < 30 else 0
+            compteur["plus_de_30_ans"] += 1 if utilisateur['age'] >= 30 else 0
+            compteur["niveau-faible"] += 1 if utilisateur['niveau_securite'] == "Faible" else 0
+            compteur["niveau-moyen"] += 1 if utilisateur['niveau_securite'] == "Moyen" else 0
+            compteur["niveau-fort"] += 1 if utilisateur['niveau_securite'] == "Fort" else 0
+            compteur["longueur_total_mot_de_passe"] += len(utilisateur['mot_de_passe'])
+
+      print(f"\n\nLe nombre total d'utilisateurs est de 👉 {len(liste_utilisateurs)}")
+
+      print(f"\nLe nombre d'utilisateurs de moins de 30 ans est de 👉 {compteur["moins_de_30_ans"]}"
+            f"\nLe nombre d'utilisateurs de 30 ans et plus est de 👉 {compteur["plus_de_30_ans"]}")
+
+      print(f"\nLe nombre d'utilisateurs de niveau de sécurité faible est de 👉 {compteur["niveau-faible"]}"
+            f"\nLe nombre d'utilisateurs de niveau de sécurité moyen est de 👉 {compteur["niveau-moyen"]}"
+            f"\nLe nombre d'utilisateurs de niveau de sécurité fort est de 👉 {compteur["niveau-fort"]}")
+
+      print(f"\nLe taille moyenne des mots de passe est de 👉 {compteur["longueur_total_mot_de_passe"] / len(liste_utilisateurs)}")
 
 
 # Consignes
@@ -52,19 +82,11 @@ def afficher_consignes_selection_utilisateur():
       afficher_revenir_menu_principal()
 
 
-
-def afficher_liste_utilisateurs(liste_utilisateurs):
-      print("\n\n🔹🔹🔹🔹AFFICHER LA LISTE DES UTILISATEURS🔹🔹🔹🔹")
-      for index, utilisateur in enumerate(liste_utilisateurs):
-            print(f"{index} - Prénom: {utilisateur['prenom']} - Age: {utilisateur['age']} - "
-                  f"Mot de passe: {utilisateur['mot_de_passe']} - Niveau de sécurité: {utilisateur['niveau_securite']}")
-
+# Divers
 def afficher_liste_utilisateurs_trouves(liste_utilisateurs_trouves):
       print("\n\nListe des utilisateurs potentiels:")
       for index, utilisateur in enumerate(liste_utilisateurs_trouves):
             print(f"{index} - {utilisateur['prenom']} - {utilisateur['age']} ans")
-
-
 
 def afficher_liste_erreur(erreurs):
       print("\n\n\033[31mVotre saisi n'est pas valide pour les raisons suivantes:\033[0m")
@@ -73,3 +95,4 @@ def afficher_liste_erreur(erreurs):
 
 def afficher_revenir_menu_principal():
       print("\033[33mPour revenir au menu principal, tapez 👉SORTIR👈\033[0m")
+      

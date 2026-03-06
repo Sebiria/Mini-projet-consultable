@@ -40,7 +40,7 @@ def ajouter_utilisateur(liste_utilisateurs):
         afficher_consignes_mot_de_passe()
         mot_de_passe = input("Mot de passe : ")
         erreurs = validation_mot_de_passe(mot_de_passe)
-        if prenom.upper() == "SORTIR":
+        if mot_de_passe.upper() == "SORTIR":
             return liste_utilisateurs
         elif erreurs:
             afficher_liste_erreur(erreurs)
@@ -109,3 +109,88 @@ def supprimer_utilisateur(liste_utilisateurs):
             else:
                 print(f"❌❌❌ L'utilisateur {utilisateur['prenom']} n'a pas été supprimé ❌❌❌")
                 return liste_utilisateurs
+
+def modifier_mot_de_passe_utilisateur(liste_utilisateurs):
+    print("\n\n🔹🔹MODIFIER LE MOT DE PASSE D'UN UTILISATEUR🔹🔹")
+
+    nouveau_mot_de_passe = {"nouveau_mot_de_passe": "", "niveau_securite": ""}
+    index_utilisateur = 0
+    critere = 'prenom'
+    while True:  # Tant que le prenom (ou une partie) n'est pas saisi
+        afficher_consignes_recherche_par_prenom()
+        prenom = input("Prenom 👉 ")
+        liste_utilisateurs_trouves = validation_recherche_par_critere(prenom, liste_utilisateurs, critere)
+        if prenom.upper() == "SORTIR":  # Si l'utilisateur souhaite revenir au menu principal
+            return liste_utilisateurs
+        elif not liste_utilisateurs_trouves:  # S'il n'y a pas de correspondance
+            print("\n\n😐 Aucun utilisateur ne correspond à votre indication 😐")
+        else:  # S'il y a des correspondances
+            break
+
+    while True:  # Tant que l'un des utilisateurs trouvés n'a pas été selectionné
+        afficher_liste_utilisateurs_trouves(liste_utilisateurs_trouves)
+        afficher_consignes_selection_utilisateur()
+        nombre = input("Nombre 👉 ")
+        erreurs = validation_selection_du_bon_utilisateur(nombre, liste_utilisateurs_trouves)
+        if nombre.upper() == "SORTIR":
+            return liste_utilisateurs
+        elif erreurs:
+            afficher_liste_erreur(erreurs)
+        else:
+            utilisateur = liste_utilisateurs_trouves[int(nombre)]
+            for index, personne in enumerate(liste_utilisateurs):
+                if utilisateur == personne:
+                    index_utilisateur = index
+                    break
+            break
+
+    while True: # Tant que le mot de passe n'est pas valide
+        afficher_consignes_mot_de_passe()
+        mot_de_passe = input("Mot de passe : ")
+        erreurs = validation_mot_de_passe(mot_de_passe)
+        if mot_de_passe.upper() == "SORTIR":
+            return liste_utilisateurs
+        elif erreurs:
+            afficher_liste_erreur(erreurs)
+        else:
+            nouveau_mot_de_passe['nouveau_mot_de_passe'] = mot_de_passe
+            nouveau_mot_de_passe['niveau_securite'] = "Faible" if len(mot_de_passe) <= 9 else "Moyen" if len(mot_de_passe) <= 11 else "Fort"
+
+            break
+
+    while True: # Tant que la confirmation n'est pas valide
+        procedure = "modification de mot de passe"
+        afficher_consignes_confirmation_procedure(procedure, utilisateur['prenom'])
+        confirmation = input("Confirmation : ").lower()
+        erreurs = validation_confirmation_procedure(confirmation)
+        if erreurs:
+            afficher_liste_erreur(erreurs)
+        else:
+            if confirmation == "oui":
+                liste_utilisateurs[index_utilisateur]['mot_de_passe'] = nouveau_mot_de_passe['nouveau_mot_de_passe']
+                liste_utilisateurs[index_utilisateur]['niveau_securite'] = nouveau_mot_de_passe['niveau_securite']
+                print(f"✅✅✅ Le mot de passe de l'utilisateur {utilisateur['prenom']} a bien été changé ✅✅✅")
+                return liste_utilisateurs
+            else:
+                print(f"❌❌❌ Le mot de passe de l'utilisateur {utilisateur['prenom']} n'a pas été changé ❌❌❌")
+                return liste_utilisateurs
+
+def implementer_donnees_test(liste_utilisateurs):
+    liste = [
+        {"prenom": "SEBASTIEN", "age": 35, "mot_de_passe": "Azerty12#", "niveau_securite": "Faible"},
+        {"prenom": "ARTHUR", "age": 18, "mot_de_passe": "Azerty12#f", "niveau_securite": "Moyen"},
+        {"prenom": "CORENTIN", "age": 65, "mot_de_passe": "Azerty12#f", "niveau_securite": "Moyen"},
+        {"prenom": "GABRIELLE", "age": 42, "mot_de_passe": "Azerty12#", "niveau_securite": "Faible"},
+        {"prenom": "THIERRY", "age": 89, "mot_de_passe": "Azerty12#ert", "niveau_securite": "Fort"},
+        {"prenom": "WILLO", "age": 31, "mot_de_passe": "Azerty12#f", "niveau_securite": "Moyen"},
+        {"prenom": "FABIENNE", "age": 52, "mot_de_passe": "Azerty12#f", "niveau_securite": "Moyen"},
+        {"prenom": "HECTOR", "age": 26, "mot_de_passe": "Azerty12#f", "niveau_securite": "Moyen"},
+        {"prenom": "JEREMIE", "age": 37, "mot_de_passe": "Azerty12#ert", "niveau_securite": "Fort"},
+        {"prenom": "EMILIE", "age": 79, "mot_de_passe": "Azerty12#", "niveau_securite": "Faible"},
+        {"prenom": "ISABELLE", "age": 43, "mot_de_passe": "Azerty12#ert", "niveau_securite": "Fort"},
+        {"prenom": "NATHALIE", "age": 30, "mot_de_passe": "Azerty12#f", "niveau_securite": "Moyen"},
+        {"prenom": "PATRICIA", "age": 38, "mot_de_passe": "Azerty12#ert", "niveau_securite": "Fort"},
+    ]
+    for i in liste:
+        liste_utilisateurs.append(i)
+    return liste_utilisateurs

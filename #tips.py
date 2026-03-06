@@ -1,4 +1,4 @@
-git commit -am "Suppression utilisateur terminé, commencer la modification de donné utilisateur, dont le mot de passe est un critere"
+git commit -am "Mini-projet supposément terminé"
 git push
 
 for index, utilisateur in enumerate(liste_utilisateurs):

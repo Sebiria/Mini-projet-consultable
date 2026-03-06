@@ -7,8 +7,6 @@ def validation_choix_fonctionnalite(choix):
         erreurs.append("\033[31m- Doit être compris entre 1 et 6\033[0m")
     return erreurs
 
-
-
 def validation_prenom(prenom):
     erreurs = []
     if not prenom.isalpha():
@@ -74,8 +72,6 @@ def validation_mot_de_passe(mot_de_passe):
             if "\033[31m- Doit contenir au moins un caractère spécial (parmi => !@#$%&*)\033[0m" in erreurs:
                 erreurs.remove("\033[31m- Doit contenir au moins un caractère spécial (parmi => !@#$%&*)\033[0m")
     return erreurs
-
-
 
 def validation_confirmation_procedure(confirmation):
     erreurs = []
