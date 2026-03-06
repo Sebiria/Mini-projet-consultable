@@ -1,4 +1,4 @@
-git commit -am "Finir la fonctionnalité de suppression d'un utilisateur"
+git commit -am "Suppression utilisateur terminé, commencer la modification de donné utilisateur, dont le mot de passe est un critere"
 git push
 
 for index, utilisateur in enumerate(liste_utilisateurs):

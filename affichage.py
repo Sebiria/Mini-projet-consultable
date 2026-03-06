@@ -41,14 +41,14 @@ def afficher_consignes_mot_de_passe():
       afficher_revenir_menu_principal()
 
 def afficher_consignes_confirmation_procedure(procedure, prenom):
-      print(f"\n\nIndiquez 👉oui/non👈 pour la confirmation de {procedure} s'agissant de {prenom}")
+      print(f"\n\nIndiquez 👉oui/non👈 pour la confirmation de {procedure} s'agissant de \033[33m{prenom}\033[0m")
 
 def afficher_consignes_recherche_par_prenom():
       print("Indiquez le prénom (ou en partie) de l'utilisateur en question")
       afficher_revenir_menu_principal()
 
 def afficher_consignes_selection_utilisateur():
-      print("Indiquez le nombre qui précède le prenom de l'utilisateur en question")
+      print("\nIndiquez le nombre qui précède le prenom de l'utilisateur en question")
       afficher_revenir_menu_principal()
 
 
@@ -60,6 +60,7 @@ def afficher_liste_utilisateurs(liste_utilisateurs):
                   f"Mot de passe: {utilisateur['mot_de_passe']} - Niveau de sécurité: {utilisateur['niveau_securite']}")
 
 def afficher_liste_utilisateurs_trouves(liste_utilisateurs_trouves):
+      print("\n\nListe des utilisateurs potentiels:")
       for index, utilisateur in enumerate(liste_utilisateurs_trouves):
             print(f"{index} - {utilisateur['prenom']} - {utilisateur['age']} ans")
 

@@ -8,6 +8,7 @@ if __name__ == "__main__":
     liste_utilisateurs = []
 
     while True: # Tant que le programme est en cours d'exécution
+        print(liste_utilisateurs)
         afficher_menu_principal()
         choix = input("Votre choix : ")
         erreurs = validation_choix_fonctionnalite(choix)
@@ -34,7 +35,7 @@ if __name__ == "__main__":
 
                 if choix == "4":  # Afficher la liste des utilisateurs
                     afficher_liste_utilisateurs(liste_utilisateurs)
-                    input("\033[33mPour revenir au menu principal, appuyez sur la touche 👉ENTRÉE👈\033[0m")
+                    input("\033[33mPour revenir au menu principal, appuyez sur la touche ⚪ENTRÉE⚪\033[0m")
                 #if choix == "5":
 
 

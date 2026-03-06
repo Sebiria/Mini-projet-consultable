@@ -22,8 +22,17 @@ def validation_prenom(prenom):
 def validation_recherche_par_critere(prenom, liste_utilisateurs, critere):
     liste_utilisateurs_trouves = []
     for utilisateur in liste_utilisateurs:
-        if prenom.upper() in utilisateur[critere]:
+        if prenom.upper() in utilisateur[critere] and not prenom == "":
             liste_utilisateurs_trouves.append(utilisateur)
+    return liste_utilisateurs_trouves
+
+def validation_selection_du_bon_utilisateur(nombre, liste_utilisateurs_trouves):
+    erreurs = []
+    if not nombre.isdigit():
+        erreurs.append("\033[31m- Ne doit contenir que des chiffres\033[0m")
+    elif not 0 <= int(nombre) <= len(liste_utilisateurs_trouves) - 1:
+        erreurs.append("\033[31m- Doit être un chiffre qui précède le prénom de l'utilisateur en question\033[0m")
+    return erreurs
 
 def validation_age(age):
     erreurs = []

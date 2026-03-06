@@ -3,7 +3,8 @@ from affichage import (afficher_consignes_prenom, afficher_liste_erreur,
                        afficher_consignes_confirmation_procedure, afficher_consignes_recherche_par_prenom,
                        afficher_liste_utilisateurs_trouves, afficher_consignes_selection_utilisateur)
 from validation import (validation_prenom, validation_age, validation_mot_de_passe,
-                        validation_confirmation_procedure, validation_recherche_par_critere)
+                        validation_confirmation_procedure, validation_recherche_par_critere,
+                        validation_selection_du_bon_utilisateur)
 
 
 def ajouter_utilisateur(liste_utilisateurs):
@@ -58,8 +59,10 @@ def ajouter_utilisateur(liste_utilisateurs):
         else:
             if confirmation == "oui":
                 liste_utilisateurs.append(utilisateur)
+                print(f"✅✅✅ L'utilisateur {utilisateur['prenom']} a bien été ajouté ✅✅✅")
                 return liste_utilisateurs
             else:
+                print(f"❌❌❌ L'utilisateur {utilisateur['prenom']} n'a pas été ajouté ❌❌❌")
                 return liste_utilisateurs
 
 def supprimer_utilisateur(liste_utilisateurs):
@@ -73,7 +76,7 @@ def supprimer_utilisateur(liste_utilisateurs):
         if prenom.upper() == "SORTIR": # Si l'utilisateur souhaite revenir au menu principal
             return liste_utilisateurs
         elif not liste_utilisateurs_trouves: # S'il n'y a pas de correspondance
-            print("😐 Aucun utilisateur ne correspond à votre indication 😐")
+            print("\n\n😐 Aucun utilisateur ne correspond à votre indication 😐")
         else:# S'il y a des correspondances
             break
 
@@ -82,4 +85,27 @@ def supprimer_utilisateur(liste_utilisateurs):
         afficher_liste_utilisateurs_trouves(liste_utilisateurs_trouves)
         afficher_consignes_selection_utilisateur()
         nombre = input("Nombre 👉 ")
-        erreurs =
+        erreurs = validation_selection_du_bon_utilisateur(nombre, liste_utilisateurs_trouves)
+        if nombre.upper() == "SORTIR":
+            return liste_utilisateurs
+        elif erreurs:
+            afficher_liste_erreur(erreurs)
+        else:
+            break
+
+    while True:  # Tant que la confirmation n'est pas valide
+        utilisateur = liste_utilisateurs_trouves[int(nombre)]
+        procedure = "suppression d'utilisateur"
+        afficher_consignes_confirmation_procedure(procedure, utilisateur['prenom'])
+        confirmation = input("Confirmation : ").lower()
+        erreurs = validation_confirmation_procedure(confirmation)
+        if erreurs:
+            afficher_liste_erreur(erreurs)
+        else:
+            if confirmation == "oui":
+                liste_utilisateurs.remove(utilisateur)
+                print(f"✅✅✅ L'utilisateur {utilisateur['prenom']} a bien été supprimé ✅✅✅")
+                return liste_utilisateurs
+            else:
+                print(f"❌❌❌ L'utilisateur {utilisateur['prenom']} n'a pas été supprimé ❌❌❌")
+                return liste_utilisateurs
